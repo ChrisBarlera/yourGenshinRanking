@@ -1,16 +1,20 @@
-const texto = document.getElementById('texto')
-const botao = document.getElementById('botao')
-const imagem = document.getElementById('imagem')
-
-
-botao.addEventListener('click', () => {
-    let character = String(texto.value).toLowerCase()
-    let url = 'https://api.genshin.dev/characters/'+ character
-    imagem.src = "https://api.genshin.dev/characters/"+character+"/card"
-})
-
-const getCharData = async (url) => {
+var character = localStorage.getItem('characterName')
+const urlBase = 'https://api.genshin.dev/characters/'
+const url = urlBase + character
+getCharData(url)
+/**
+ * Based on URL, returns the character's JSON
+ * @param {String} url 
+ */
+async function getCharData(url) {
     const response = await fetch(url)
     const resJSON = await response.json()
-    return resJSON;
+    const card = document.getElementById('card')
+    card.src = url + "/card"
+
+    const nameTitle = document.getElementById('nameTitle')
+    nameTitle.innerText = resJSON['name']
+
+    const description = document.getElementById('description')
+    description.innerText = resJSON['description']
 }
