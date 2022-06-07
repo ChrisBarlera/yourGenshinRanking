@@ -12,7 +12,7 @@ namesList.forEach(name => {
         const nameString = mountCharString(name.innerText)
         console.log(nameString)
         localStorage.setItem('characterName',nameString)
-        window.open('../charPage/index.html')
+        window.open('../charPage/index.html','_self')
     })
 })
 

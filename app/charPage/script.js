@@ -18,3 +18,9 @@ async function getCharData(url) {
     const description = document.getElementById('description')
     description.innerText = resJSON['description']
 }
+
+
+const returntoMain = document.getElementById('returntoMain')
+returntoMain.addEventListener('click', () => {
+    window.open('../main/index.html', '_self')
+})
