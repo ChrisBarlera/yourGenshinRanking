@@ -1,7 +1,8 @@
-var character = localStorage.getItem('characterName')
+var character = sessionStorage.getItem('characterName')
 const urlBase = 'https://api.genshin.dev/characters/'
-const url = urlBase + character
-getCharData(url)
+const urlWithChar = urlBase + character
+const imageType = '/gacha-splash'
+getCharData(urlWithChar)
 /**
  * Based on URL, returns the character's JSON
  * @param {String} url 
@@ -9,14 +10,18 @@ getCharData(url)
 async function getCharData(url) {
     const response = await fetch(url)
     const resJSON = await response.json()
-    const card = document.getElementById('card')
-    card.src = url + "/card"
 
-    const nameTitle = document.getElementById('nameTitle')
-    nameTitle.innerText = resJSON['name']
+    document.getElementById('charImg').src = url + imageType
+    document.getElementById('nameTitle').innerText = resJSON['name']
+    document.getElementById('charDescription').innerText = resJSON['description']
 
-    const description = document.getElementById('description')
-    description.innerText = resJSON['description']
+    document.getElementById('charName').innerText = resJSON['name']
+    document.getElementById('charVision').innerText = resJSON['vision']
+    document.getElementById('charWeapon').innerText = resJSON['weapon']
+    document.getElementById('charNation').innerText = resJSON['nation']
+    document.getElementById('charAffiliation').innerText = resJSON['affiliation']
+    document.getElementById('charBirthday').innerText = resJSON['birthday']
+
 }
 
 

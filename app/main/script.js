@@ -11,7 +11,7 @@ namesList.forEach(name => {
     name.addEventListener('click', () => {
         const nameString = mountCharString(name.innerText)
         console.log(nameString)
-        localStorage.setItem('characterName',nameString)
+        sessionStorage.setItem('characterName',nameString)
         window.open('../charPage/index.html','_self')
     })
 })

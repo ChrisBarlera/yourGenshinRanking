@@ -6,17 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Genshin Impact</title>
     <link rel="stylesheet" href="style.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <script src="script.js" type="module"></script>
 </head>
 <body>
     <header>
         <!-- <a href="../main/index.html"><</a> -->
-        <button id="returntoMain"> botao </button>
-        <h1 id="nameTitle"></h1>
+        <button id="returntoMain"> <i class="fi fi-rr-arrow-small-left"></i> </button>
+        <label id="nameTitle"></label>
     </header>
     <main>
-        <img id="card">
-        <p id="description"></p>
+        <img id="charImg">
+        <ul id="charProfile">
+            <li class="profileItem">
+                <label for="charName">Name: </label>
+                <p id="charName"></p>
+            </li>
+            <li class="profileItem">
+                <label for="charVision">Vision: </label>
+                <p id="charVision"></p>
+            </li>
+            <li class="profileItem">
+                <label for="charWeapon">Weapon: </label>
+                <p id="charWeapon"></p>
+            </li>
+            <li class="profileItem">
+                <label for="charNation">Nation: </label>
+                <p id="charNation"></p>
+            </li>
+            <li class="profileItem">
+                <label for="charAffiliation">Afiliation: </label>
+                <p id="charAffiliation"></p>
+            </li>
+            <li class="profileItem">
+                <label for="charBirthday">Birthday: </label>
+                <p id="charBirthday"></p>
+            </li>  
+        </ul>
+        <p id="charDescription"></p>
     </main>
 </body>
 </html>

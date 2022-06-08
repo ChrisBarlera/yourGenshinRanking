@@ -10,18 +10,63 @@ html, body {
     height: 100%;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-    font-size: 70px;
+header {
+    display: flex;
+    align-items: center;
+    border: 2px solid red;
+    height: 10%;
+    background-color: rgb(245, 245, 245);
+    /* font-weight: 300; */
 }
 
-button {
-    font-size: 70px;
+header > button {
+    font-size: 2.5em;
     border: 0;
+    background-color: transparent;
+    width: 10%;
+    height: 100%;
 }
 
-#card {
-    width: 200px;
-    height: auto;
+header > label {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.5em;
+    font-weight: 450;
+}
+
+main {
+    height: 90%;
+    border: 2px solid blue;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#charImg {
+    height: 50vh;
+    width: auto;
+    background-color: coral;
+}
+
+#charProfile {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    text-align: center;
+    align-items: center;
+    border: 2px solid blueviolet;
+}
+
+.profileItem {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 10px;
+}
+
+.profileItem > label {
+    font-weight: bold;
 }
