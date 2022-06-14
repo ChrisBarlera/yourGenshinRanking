@@ -1,18 +1,19 @@
 import {mountCharString} from "../functions/strings.js"
 import {mountStringtoLabel} from "../functions/strings.js"
 
+if (sessionStorage.getItem('charactersContainer') != null) {
+    document.getElementById('charactersContainer').innerHTML = sessionStorage.getItem('charactersContainer')
+}
 const searchCharField = document.getElementById('searchCharField')
 const submitButton = document.getElementById('submitButton');
 const charList = document.getElementsByClassName('containerItem')
-const namesList = document.querySelectorAll('.charName')
+var namesList = document.querySelectorAll('.charName')
 var listCount = charList.length - 1
 
 namesList.forEach(name => {
     name.addEventListener('click', () => {
         const nameString = mountCharString(name.innerText)
-        console.log(nameString)
-        sessionStorage.setItem('characterName',nameString)
-        window.open('../charPage/index.html','_self')
+        goToCharPage(nameString)
     })
 })
 
@@ -44,4 +45,11 @@ function addCharToContainer(character) {
     newNode.src = 'https://api.genshin.dev/characters/'+character+'/icon-big'
     element.replaceChild(newNode, iNode)
     element.childNodes[5].innerText = mountStringtoLabel(character)
+}
+
+function goToCharPage(charName) {
+    const charactersContainer = document.getElementById('charactersContainer').innerHTML
+    sessionStorage.setItem('characterName',charName)
+    sessionStorage.setItem('charactersContainer',charactersContainer)
+    window.open('../charPage/index.html','_self')
 }

@@ -51,7 +51,7 @@ main {
     height: 90%;
 }
 
-#chararactersContainer {
+#charactersContainer {
     width: 100%;
     height: 100%;
     padding-left: 10vw;
@@ -61,7 +61,7 @@ main {
     justify-content: space-around;
 }
 
-#chararactersContainer > label {
+#charactersContainer > label {
     text-align: center;
     font-size: 1.5em;
     font-weight: 450;
