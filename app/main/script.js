@@ -3,6 +3,7 @@ if (sessionStorage.getItem('charactersContainer') != null) {
 }
 const searchCharField = document.getElementById('searchCharField')
 const submitButton = document.getElementById('submitButton');
+const olContainer = document.getElementById('charactersContainer')
 const charList = document.querySelectorAll('.containerItem')
 const namesList = document.querySelectorAll('.charName')
 var listCount = charList.length - 1
@@ -78,6 +79,11 @@ function replaceChar(baseString, index, strToInsert) {
     return finalString
 }
 
+function getContainerItemPos(element) {
+    pos = parseInt(element.children[0].innerText) - 1
+    return pos
+}
+
 
 namesList.forEach(name => {
 name.addEventListener('click', () => {
@@ -105,35 +111,56 @@ submitButton.addEventListener('click', () => {
 
 function addDragAndDrop() {
     charList.forEach(item => {
-        // item.children[3].addEventListener('ondragstart', drag)
-        item.children[3].ondragstart = drag
-        // item.addEventListener('ondragover', allowDrop)
-        item.ondragover = allowDrop
-        // item.addEventListener('ondrop', drop)
-        item.ondrop = drop
+        item.children[3].addEventListener('dragstart', dragStart)
+        // item.children[3].addEventListener('drag', dragging)
+        // item.children[3].addEventListener('dragend', dragEnd)
+
+        item.addEventListener('dragenter', dragEnter)
+        item.addEventListener('dragover', dragOver)
+        item.addEventListener('dragleave', dragLeave)
+        item.addEventListener('drop', drop)
     })
 }
 addDragAndDrop()
 
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.parentNode.innerHTML);
-    console.log(ev.target.parentNode.innerHTML);
+function dragStart(ev) {
+    let dragThingPos = getContainerItemPos(ev.target.parentNode)
+    ev.dataTransfer.setData('text', dragThingPos.toString())
+    // ev.target.parentNode.classList.add('draggedElement')
 }
 
-function allowDrop(ev) {
-    ev.preventDefault()
-    ev.target.classList.add('dragHover')
+function dragging(ev) {
+    // dragging update
+}
+
+function dragEnd(ev) {
+    // drag end
+}
+
+
+
+
+function dragEnter(ev) {
+    ev.target.classList.add('zoneHighlight')
+    // ev.target.classList.add('tempElement')
+}
+
+function dragOver(ev) {
+    ev.preventDefault();
+    //dragover
+}
+
+function dragLeave(ev) {
+    ev.target.classList.remove('zoneHighlight')
+    // ev.target.classList.remove('tempElement')
 }
 
 function drop(ev) {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-
-    // var containerQtavaAntes = ev.target.innerHTML
-    // containerDoDrag.innerHTML = containerQtavaAntes
-
-    ev.target.innerHTML = data
-    console.log(ev.target.innerHTML);
-    ev.target.classList.remove('dragHover')
-    addDragAndDrop()
+    ev.target.classList.remove('zoneHighlight')
+    let dropzonePos = getContainerItemPos(ev.target)
+    let dragThingPos = parseInt(ev.dataTransfer.getData('text'))
+    let tempContainer = charList[dropzonePos]
+    olContainer.replaceChild(charList[dragThingPos], charList[dropzonePos])
+    olContainer.appendChild(tempContainer) //isso que tem q ver
 }
