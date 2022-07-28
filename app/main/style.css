@@ -61,7 +61,7 @@ main {
     justify-content: space-around;
 }
 
-#charactersContainer > label {
+#charactersContainer > span {
     text-align: center;
     font-size: 1.5em;
     font-weight: 450;
@@ -76,12 +76,12 @@ main {
     justify-content: space-around;
     align-items: center;
 }
-.containerItem > label {
+.containerItem > span {
     font-size: 1.5em;
     text-align: center;
 }
 
-.containerItem > label:nth-child(3) {
+.containerItem > span:nth-child(3) {
     cursor: pointer;
 }
 

@@ -84,6 +84,14 @@ function getContainerItemPos(element) {
     return pos
 }
 
+function isItemChild(element) {
+    if (element.children.length == charList[0].children.length) {
+        return false
+    } else {
+        return true
+    }
+}
+
 
 namesList.forEach(name => {
 name.addEventListener('click', () => {
@@ -112,8 +120,8 @@ submitButton.addEventListener('click', () => {
 function addDragAndDrop() {
     charList.forEach(item => {
         item.children[3].addEventListener('dragstart', dragStart)
-        // item.children[3].addEventListener('drag', dragging)
-        // item.children[3].addEventListener('dragend', dragEnd)
+        item.children[3].addEventListener('drag', dragging)
+        item.children[3].addEventListener('dragend', dragEnd)
 
         item.addEventListener('dragenter', dragEnter)
         item.addEventListener('dragover', dragOver)
@@ -137,12 +145,17 @@ function dragEnd(ev) {
     // drag end
 }
 
-
+//dragLeave acontece depois de dragEnter, ou seja, ele apaga a classe que foi adicionada
 
 
 function dragEnter(ev) {
-    ev.target.classList.add('zoneHighlight')
-    // ev.target.classList.add('tempElement')
+    console.log('enter' + ev.target);
+    var theElement = ev.target
+
+    if (isItemChild(theElement)) {
+        theElement = ev.target.parentNode
+    }
+    theElement.classList.add('zoneHighlight')
 }
 
 function dragOver(ev) {
@@ -151,14 +164,22 @@ function dragOver(ev) {
 }
 
 function dragLeave(ev) {
-    ev.target.classList.remove('zoneHighlight')
-    // ev.target.classList.remove('tempElement')
+    if (isItemChild(ev.target)){
+        ev.target.parentNode.classList.remove('zoneHighlight')
+        console.log('leave' + ev.target);
+    }
 }
 
 function drop(ev) {
     ev.preventDefault();
-    ev.target.classList.remove('zoneHighlight')
-    let dropzonePos = getContainerItemPos(ev.target)
+    var theElement = ev.target
+
+    if (isItemChild(theElement)) {
+        theElement = ev.target.parentNode
+    }
+
+    theElement.classList.remove('zoneHighlight')
+    let dropzonePos = getContainerItemPos(theElement)
     let dragThingPos = parseInt(ev.dataTransfer.getData('text'))
     let tempContainer = charList[dropzonePos]
     olContainer.replaceChild(charList[dragThingPos], charList[dropzonePos])
