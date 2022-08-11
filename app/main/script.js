@@ -94,17 +94,17 @@ function isItemChild(element) {
 
 
 namesList.forEach(name => {
-name.addEventListener('click', () => {
-    const nameString = mountCharString(name.innerText)
-    goToCharPage(nameString)
-})
+    name.addEventListener('click', () => {
+        const nameString = mountCharString(name.innerText)
+        goToCharPage(nameString)
+    })
 })
 
 searchCharField.addEventListener('keypress', function (event) {
-if (event.key === 'Enter') {
-    submitButton.click()
-    searchCharField.value = ''
-}
+    if (event.key === 'Enter') {
+        submitButton.click()
+        searchCharField.value = ''
+    }
 })
 submitButton.addEventListener('click', () => {
     const character = mountCharString(searchCharField.value)
@@ -146,27 +146,37 @@ function dragEnd(ev) {
 }
 
 //dragLeave acontece depois de dragEnter, ou seja, ele apaga a classe que foi adicionada
-
-
+//se sai de um child, remove classe do pai
+//se entra em child coloca classe no pai
 function dragEnter(ev) {
-    console.log('enter' + ev.target);
-    var theElement = ev.target
-
-    if (isItemChild(theElement)) {
-        theElement = ev.target.parentNode
-    }
-    theElement.classList.add('zoneHighlight')
+    // if (isItemChild(ev.target)){
+    //     ev.target.parentNode.classList.add('zoneHighlight')
+    // } else {
+    //     ev.target.classList.add('zoneHighlight')
+    // }
 }
 
 function dragOver(ev) {
     ev.preventDefault();
+    if (isItemChild(ev.target)) {
+        ev.target.parentNode.style.border = "3px solid rgb(100, 255, 229)"
+    } else {
+        ev.target.style.border = "3px solid rgb(100, 255, 229)"
+    }
+    
     //dragover
 }
 
 function dragLeave(ev) {
-    if (isItemChild(ev.target)){
-        ev.target.parentNode.classList.remove('zoneHighlight')
-        console.log('leave' + ev.target);
+//     if (isItemChild(ev.target)){
+//         ev.target.parentNode.classList.remove('zoneHighlight')
+//     } else {
+//         ev.target.classList.remove('zoneHighlight')
+//     }
+    if (isItemChild(ev.target)) {
+        ev.target.parentNode.style.border = ""
+    } else {
+        ev.target.style.border = ""
     }
 }
 
@@ -178,7 +188,7 @@ function drop(ev) {
         theElement = ev.target.parentNode
     }
 
-    theElement.classList.remove('zoneHighlight')
+    theElement.style.border = ""
     let dropzonePos = getContainerItemPos(theElement)
     let dragThingPos = parseInt(ev.dataTransfer.getData('text'))
     let tempContainer = charList[dropzonePos]
