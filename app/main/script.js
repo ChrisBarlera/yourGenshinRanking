@@ -120,10 +120,6 @@ submitButton.addEventListener('click', () => {
 function addDragAndDrop() {
     charList.forEach(item => {
         item.children[3].addEventListener('dragstart', dragStart)
-        item.children[3].addEventListener('drag', dragging)
-        item.children[3].addEventListener('dragend', dragEnd)
-
-        item.addEventListener('dragenter', dragEnter)
         item.addEventListener('dragover', dragOver)
         item.addEventListener('dragleave', dragLeave)
         item.addEventListener('drop', drop)
@@ -134,26 +130,6 @@ addDragAndDrop()
 function dragStart(ev) {
     let dragThingPos = getContainerItemPos(ev.target.parentNode)
     ev.dataTransfer.setData('text', dragThingPos.toString())
-    // ev.target.parentNode.classList.add('draggedElement')
-}
-
-function dragging(ev) {
-    // dragging update
-}
-
-function dragEnd(ev) {
-    // drag end
-}
-
-//dragLeave acontece depois de dragEnter, ou seja, ele apaga a classe que foi adicionada
-//se sai de um child, remove classe do pai
-//se entra em child coloca classe no pai
-function dragEnter(ev) {
-    // if (isItemChild(ev.target)){
-    //     ev.target.parentNode.classList.add('zoneHighlight')
-    // } else {
-    //     ev.target.classList.add('zoneHighlight')
-    // }
 }
 
 function dragOver(ev) {
@@ -163,16 +139,9 @@ function dragOver(ev) {
     } else {
         ev.target.style.border = "3px solid rgb(100, 255, 229)"
     }
-    
-    //dragover
 }
 
 function dragLeave(ev) {
-//     if (isItemChild(ev.target)){
-//         ev.target.parentNode.classList.remove('zoneHighlight')
-//     } else {
-//         ev.target.classList.remove('zoneHighlight')
-//     }
     if (isItemChild(ev.target)) {
         ev.target.parentNode.style.border = ""
     } else {
