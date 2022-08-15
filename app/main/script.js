@@ -160,7 +160,16 @@ function drop(ev) {
     theElement.style.border = ""
     let dropzonePos = getContainerItemPos(theElement)
     let dragThingPos = parseInt(ev.dataTransfer.getData('text'))
-    let tempContainer = charList[dropzonePos]
-    olContainer.replaceChild(charList[dragThingPos], charList[dropzonePos])
-    olContainer.appendChild(tempContainer) //isso que tem q ver
+    let draggingHTML = charList[dragThingPos].innerHTML
+    let dropHTML = charList[dropzonePos].innerHTML
+    charList[dropzonePos].innerHTML = draggingHTML
+    charList[dragThingPos].innerHTML = dropHTML
+
+    let auxdropzonePos = dropzonePos + 1
+    let auxdragThingPos = dragThingPos + 1
+
+    charList[dropzonePos].children[0].innerText = auxdropzonePos
+    charList[dragThingPos].children[0].innerText = auxdragThingPos
+
+    addDragAndDrop()
 }
