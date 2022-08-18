@@ -10,6 +10,18 @@ var listCount = charList.length - 1
 
 containerBorderFocus(true)
 containerBorderFocus(false)
+
+function clearAllCharacters() {
+    let defaultContainer = '<i class=\"fi fi-rr-user\"></i><span class=\"charName\">Character name</span><button draggable=\"true\">=</button>'
+    charList.forEach(element => {
+        element.innerHTML = element.innerHTML.slice(0,element.innerHTML.indexOf("<i"))+defaultContainer
+    });
+    listCount = 4
+    containerBorderFocus(true)
+    containerBorderFocus(false)
+
+}
+
 function containerBorderFocus(clear) {
     if (clear) {
         charList.forEach(element => {
@@ -30,7 +42,7 @@ function addCharToContainer(character) {
     const newNode = document.createElement('img')
     newNode.src = 'https://api.genshin.dev/characters/'+character+'/icon-big'
     element.replaceChild(newNode, iNode)
-    element.childNodes[5].innerText = mountStringtoLabel(character)
+    element.children[2].innerText = mountStringtoLabel(character)
 }
 
 function goToCharPage(charName) {
