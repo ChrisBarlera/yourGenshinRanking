@@ -19,7 +19,7 @@ function clearAllCharacters() {
     listCount = 4
     containerBorderFocus(true)
     containerBorderFocus(false)
-
+    addDragAndDrop()
 }
 
 function containerBorderFocus(clear) {
