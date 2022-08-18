@@ -8,6 +8,18 @@ const charList = document.querySelectorAll('.containerItem')
 const namesList = document.querySelectorAll('.charName')
 var listCount = charList.length - 1
 
+containerBorderFocus(true)
+containerBorderFocus(false)
+function containerBorderFocus(clear) {
+    if (clear) {
+        charList.forEach(element => {
+            element.style.border = ""
+        });
+    } else {
+        charList[listCount].style.border = "2px solid rgb(100, 100, 100)"
+    }
+}
+
 /**
  * Replaces the user icon with a character's icon
  * @param {String} character 
@@ -114,7 +126,9 @@ submitButton.addEventListener('click', () => {
     } else {
         addCharToContainer(character)
     }
+    containerBorderFocus(true)
     listCount -= 1
+    containerBorderFocus(false)
 })
 
 function addDragAndDrop() {
@@ -171,5 +185,6 @@ function drop(ev) {
     charList[dropzonePos].children[0].innerText = auxdropzonePos
     charList[dragThingPos].children[0].innerText = auxdragThingPos
 
+    containerBorderFocus(false)
     addDragAndDrop()
 }
