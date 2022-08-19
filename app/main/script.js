@@ -5,11 +5,12 @@ const searchCharField = document.getElementById('searchCharField')
 const submitButton = document.getElementById('submitButton');
 const olContainer = document.getElementById('charactersContainer')
 const charList = document.querySelectorAll('.containerItem')
-const namesList = document.querySelectorAll('.charName')
+const namesList = document.getElementsByClassName('charName')
 var listCount = charList.length - 1
 
 containerBorderFocus(true)
 containerBorderFocus(false)
+addNameClick()
 
 function clearAllCharacters() {
     let defaultContainer = '<i class=\"fi fi-rr-user\"></i><span class=\"charName\">Character name</span><button draggable=\"true\">=</button>'
@@ -20,6 +21,7 @@ function clearAllCharacters() {
     containerBorderFocus(true)
     containerBorderFocus(false)
     addDragAndDrop()
+    addNameClick()
 }
 
 function containerBorderFocus(clear) {
@@ -117,12 +119,15 @@ function isItemChild(element) {
 }
 
 
-namesList.forEach(name => {
-    name.addEventListener('click', () => {
-        const nameString = mountCharString(name.innerText)
-        goToCharPage(nameString)
-    })
-})
+function addNameClick() {
+    for (let index = 0; index < namesList.length; index++) {
+        const name = namesList[index];
+        name.addEventListener('click', () => {
+            const nameString = mountCharString(name.innerText)
+            goToCharPage(nameString)
+        })
+    }
+}
 
 searchCharField.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
@@ -199,4 +204,5 @@ function drop(ev) {
 
     containerBorderFocus(false)
     addDragAndDrop()
+    addNameClick()
 }
