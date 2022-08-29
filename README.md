@@ -1,10 +1,8 @@
-# yourGenshinRanking
+# [yourGenshinRanking](app/main/index.html)
 
 Uma aplicação que permite ao usuário **criar** um ranking **top 5 de seus personagens favoritos** do videogame *Genshin Impact*, assim como acessar uma **página com algumas informações** destes personagens.
 
-![vFinal](https://user-images.githubusercontent.com/44930401/185702930-fa20fe38-74c0-468e-a543-e992022204c4.gif)
-
-([Teste aqui](app/main/index.html))
+![Animação de demonstração](https://user-images.githubusercontent.com/44930401/185702930-fa20fe38-74c0-468e-a543-e992022204c4.gif)
 
 ## Atuais funcionalidades
 - Pesquisar nome do personagem
